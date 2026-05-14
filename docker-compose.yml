@@ -34,5 +34,19 @@ services:
       timeout: 5s
       retries: 10
 
+  phpmyadmin:
+    image: phpmyadmin:5
+    container_name: firulais-turnos-phpmyadmin
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_USER: firulais
+      PMA_PASSWORD: firulais
+    depends_on:
+      db:
+        condition: service_healthy
+
 volumes:
   mysql_data:

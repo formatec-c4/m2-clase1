@@ -249,11 +249,26 @@ Abrir:
 http://localhost:8000
 ```
 
+Abrir phpMyAdmin:
+
+```text
+http://localhost:8081
+```
+
+Credenciales:
+
+```text
+usuario: firulais
+password: firulais
+base: firulais
+```
+
 Qué observar:
 
 - la página carga desde Flask;
 - los turnos se leen desde MySQL;
 - desde la página se puede crear, editar y borrar turnos;
+- phpMyAdmin permite ver la base `firulais` y la tabla `turnos`;
 - todo corre dentro de un mismo contenedor;
 - los datos persisten en el volumen `mysql_old_data`.
 
@@ -318,6 +333,21 @@ http://localhost:8000
 Los cambios deberían verse en la tabla.
 
 ## 7. Mirar MySQL por dentro
+
+La forma visual es abrir phpMyAdmin:
+
+```text
+http://localhost:8081
+```
+
+Desde ahí:
+
+1. Entrar a la base `firulais`.
+2. Abrir la tabla `turnos`.
+3. Revisar columnas, filas e inserts.
+4. Crear o editar un registro y luego refrescar `http://localhost:8000`.
+
+También se puede entrar por terminal.
 
 Entrar al contenedor old:
 
@@ -452,10 +482,25 @@ Abrir:
 http://localhost:8000
 ```
 
+Abrir phpMyAdmin:
+
+```text
+http://localhost:8081
+```
+
+Credenciales:
+
+```text
+usuario: firulais
+password: firulais
+base: firulais
+```
+
 Qué observar:
 
 - Flask corre en el contenedor `firulais-turnos-app`;
 - MySQL corre en el contenedor `firulais-turnos-db`;
+- phpMyAdmin corre en el contenedor `firulais-turnos-phpmyadmin`;
 - la app se conecta a MySQL usando `DB_HOST=db`;
 - el CRUD sigue operando desde la misma pantalla web;
 - los datos persisten en el volumen `mysql_data`.
@@ -483,6 +528,14 @@ http://localhost:8000
 Los turnos creados en la versión old deberían aparecer en la versión replatform.
 
 ## 12. Mirar MySQL separado
+
+La forma visual es usar phpMyAdmin:
+
+```text
+http://localhost:8081
+```
+
+Ahí se puede inspeccionar la base `firulais`, abrir `turnos`, ver los datos restaurados y comprobar que los cambios hechos desde la app aparecen en la tabla.
 
 Entrar al contenedor de base de datos:
 
