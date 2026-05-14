@@ -1,0 +1,38 @@
+services:
+  app:
+    build: .
+    container_name: firulais-turnos-app
+    ports:
+      - "8000:8000"
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_NAME: firulais
+      DB_USER: firulais
+      DB_PASSWORD: firulais
+      DUMP_PATH: /dumps/firulais-mysql-dump.sql
+    volumes:
+      - ./dumps:/dumps
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: mysql:8.4
+    container_name: firulais-turnos-db
+    environment:
+      MYSQL_DATABASE: firulais
+      MYSQL_USER: firulais
+      MYSQL_PASSWORD: firulais
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -u firulais -pfirulais --silent"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  mysql_data:

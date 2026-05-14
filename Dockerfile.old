@@ -1,0 +1,19 @@
+FROM python:3.12-slim
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+WORKDIR /app
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends default-mysql-server default-mysql-client python3-flask python3-pymysql \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY app ./app
+COPY db ./db
+COPY scripts ./scripts
+
+RUN chmod +x scripts/start-old.sh scripts/backup_mysql.sh scripts/restore_mysql.sh
+
+EXPOSE 8000
+
+CMD ["scripts/start-old.sh"]

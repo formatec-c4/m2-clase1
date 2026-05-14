@@ -1,0 +1,26 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.old
+    container_name: firulais-turnos-old
+    ports:
+      - "8000:8000"
+    environment:
+      DB_HOST: 127.0.0.1
+      DB_PORT: 3306
+      DB_NAME: firulais
+      DB_USER: firulais
+      DB_PASSWORD: firulais
+      DUMP_PATH: /dumps/firulais-mysql-dump.sql
+    volumes:
+      - mysql_old_data:/var/lib/mysql
+      - ./dumps:/dumps
+    healthcheck:
+      test: ["CMD-SHELL", "python -c \"import urllib.request; urllib.request.urlopen('http://localhost:8000/health')\""]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  mysql_old_data:
