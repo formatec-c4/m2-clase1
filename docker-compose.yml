@@ -1,9 +1,12 @@
+name: firulais-new
+
 services:
   app:
+    image: firulais-new-app:local
     build: .
-    container_name: firulais-turnos-app
+    container_name: firulais-new-app
     ports:
-      - "8000:8000"
+      - "8001:8000"
     environment:
       DB_HOST: db
       DB_PORT: 3306
@@ -19,7 +22,9 @@ services:
 
   db:
     image: mysql:8.4
-    container_name: firulais-turnos-db
+    container_name: firulais-new-db
+    ports:
+      - "3307:3306"
     environment:
       MYSQL_DATABASE: firulais
       MYSQL_USER: firulais
@@ -36,9 +41,9 @@ services:
 
   phpmyadmin:
     image: phpmyadmin:5
-    container_name: firulais-turnos-phpmyadmin
+    container_name: firulais-new-phpmyadmin
     ports:
-      - "8081:80"
+      - "8082:80"
     environment:
       PMA_HOST: db
       PMA_PORT: 3306

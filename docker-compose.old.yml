@@ -1,11 +1,15 @@
+name: firulais-legacy
+
 services:
   app:
+    image: firulais-legacy-app:local
     build:
       context: .
       dockerfile: Dockerfile.old
-    container_name: firulais-turnos-old
+    container_name: firulais-legacy-app
     ports:
       - "8000:8000"
+      - "3306:3306"
     environment:
       DB_HOST: 127.0.0.1
       DB_PORT: 3306
@@ -24,7 +28,7 @@ services:
 
   phpmyadmin:
     image: phpmyadmin:5
-    container_name: firulais-turnos-old-phpmyadmin
+    container_name: firulais-legacy-phpmyadmin
     ports:
       - "8081:80"
     environment:

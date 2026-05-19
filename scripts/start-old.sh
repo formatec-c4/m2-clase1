@@ -8,7 +8,7 @@ if [ ! -d /var/lib/mysql/mysql ]; then
   mariadb-install-db --user=mysql --datadir=/var/lib/mysql > /dev/null
 fi
 
-mariadbd --user=mysql --bind-address=127.0.0.1 --datadir=/var/lib/mysql &
+mariadbd --user=mysql --bind-address=0.0.0.0 --datadir=/var/lib/mysql &
 MYSQL_PID="$!"
 
 until mysqladmin --protocol=SOCKET ping --silent; do

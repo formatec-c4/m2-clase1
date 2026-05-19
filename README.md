@@ -232,7 +232,7 @@ docker-compose.old.yml
 Arquitectura:
 
 ```text
-Contenedor firulais-turnos-old
+Contenedor firulais-legacy-app
 ├── Flask
 └── MySQL
 ```
@@ -498,9 +498,9 @@ base: firulais
 
 Qué observar:
 
-- Flask corre en el contenedor `firulais-turnos-app`;
-- MySQL corre en el contenedor `firulais-turnos-db`;
-- phpMyAdmin corre en el contenedor `firulais-turnos-phpmyadmin`;
+- Flask corre en el contenedor `firulais-new-app`;
+- MySQL corre en el contenedor `firulais-new-db`;
+- phpMyAdmin corre en el contenedor `firulais-new-phpmyadmin`;
 - la app se conecta a MySQL usando `DB_HOST=db`;
 - el CRUD sigue operando desde la misma pantalla web;
 - los datos persisten en el volumen `mysql_data`.
